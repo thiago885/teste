@@ -1,0 +1,16 @@
+import requests
+from bs4 import BeautifulSoup
+
+def search_sku(sku):
+  # Send an HTTP request to the website and retrieve the HTML content
+  response = requests.get(f'https://www.example.com/search?q={sku}')
+  html = response.text
+  
+  # Parse the HTML content using BeautifulSoup
+  soup = BeautifulSoup(html, 'html.parser')
+  
+  # Extract the price of the SKU from the HTML
+  price_element = soup.find('span', class_='price')
+  price = float(price_element.text.strip())
+  
+  return price
